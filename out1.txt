@@ -1,0 +1,8 @@
+Filled container:
+Container contains 5 elements.
+0: It is complex number: the real = 2, the imaginary = 1. complex calculation = 2.23607
+1: It is Fraction: numerator = 3, denominator = 9. the fraction = 0.333333
+2: It is complex number: the real = 15, the imaginary = 12. complex calculation = 19.2094
+3: It is complex number: the real = 14, the imaginary = 7. complex calculation = 15.6525
+4: It is Fraction: numerator = 7, denominator = 13. the fraction = 0.538462
+Time: 4 milliseconds
