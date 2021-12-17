@@ -4,28 +4,25 @@
 //------------------------------------------------------------------------------
 
 #include "polar.h"
-
 //------------------------------------------------------------------------------
 // Вычисление значения комплексного числа.
-double polar_calculation (polar &p) {
+double polar::polar_calculation(polar &p) {
     return p.radius;
 }
 
 // Случайный ввод параметров комплексного числа
-void polar_InRnd(polar &p) {
+void polar::polar_InRnd(polar &p) {
     p.radius = Random();
     p.angle = Random();
 }
-
 //------------------------------------------------------------------------------
 // Вывод параметров полярного числа в форматируемый поток
-void polar_Out(polar &p, ofstream &ofst) {
+void polar::polar_Out(polar &p, ofstream &ofst) {
     ofst << "It is polar number: radius = " << p.radius << ", angle = " << p.angle
-         << ". Perimeter = " << polar_calculation(p) << "\n";
+         << ". Perimeter = " << polar::polar_calculation(p) << "\n";
 }
-
 //------------------------------------------------------------------------------
 // Ввод параметров поляпного числа из файла
-void polar_In(polar &p, ifstream &ifst) {
+void polar::polar_In(polar &p, ifstream &ifst) {
     ifst >> p.radius >> p.angle;
 }
