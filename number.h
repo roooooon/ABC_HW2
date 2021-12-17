@@ -22,21 +22,21 @@ public:
         fraction f;
         complex_number c;
     };
-};
-
-// Случайный ввод обобщенной чисел
-bool num_InRnd(number &n);
+    // Случайный ввод обобщенной чисел
+    static bool num_InRnd(number &n);
 
 //------------------------------------------------------------------------------
 // Вычисление периметра чисел
-double num_calculation(number &n);
+    static double num_calculation(number &n);
 
 //------------------------------------------------------------------------------
 // Ввод параметров обобщенной чисел из файла
-bool num_In(number& n, ifstream &ifst);
+    static bool num_In(number& n, ifstream &ifst);
 
 //------------------------------------------------------------------------------
 // Вывод параметров текущей фигуры в поток
-void num_Out(number &n, ofstream &ofst);
+    static void num_Out(number &n, ofstream &ofst);
+
+};
 
 #endif //UNTITLED6_NUMBER_H
