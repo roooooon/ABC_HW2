@@ -1,10 +1,9 @@
 #include "container.h"
-
 //------------------------------------------------------------------------------
 // Случайный ввод содержимого контейнера
-void con_InRnd(container &con, int size) {
+void container::con_InRnd(container &con, int size) {
     while(con.len < size) {
-        if(num_InRnd(con.cont[con.len])) {
+        if(number::num_InRnd(con.cont[con.len])) {
             con.len++;
         }
     }
@@ -12,73 +11,66 @@ void con_InRnd(container &con, int size) {
 
 //------------------------------------------------------------------------------
 // Вывод содержимого контейнера в указанный поток
-void con_Out(container &con, ofstream &ofst) {
+void container::con_Out(container &con, ofstream &ofst) {
     ofst << "Container contains " << con.len << " elements." << endl;
     for(int i = 0; i < con.len; i++) {
         ofst << i << ": ";
-        num_Out(con.cont[i], ofst);
+        number::num_Out(con.cont[i], ofst);
     }
 }
 
 //------------------------------------------------------------------------------
 // Ввод содержимого контейнера из указанного потока
-void con_In(container &con, ifstream &ifst) {
+void container::con_In(container &con, ifstream &ifst) {
     while(!ifst.eof()) {
-        if(num_In(con.cont[con.len], ifst)) {
+        if(number::num_In(con.cont[con.len], ifst)) {
             con.len++;
         }
     }
 }
-
 //------------------------------------------------------------------------------
 // Очистка контейнера от элементов (освобождение памяти)
-void con_Clear(container &con) {
+void container::con_Clear(container &con) {
     con.len = 0;
 }
 
 //------------------------------------------------------------------------------
 // Инициализация контейнера
-void Init(container &c) {
+void container::Init(container &c) {
     c.len = 0;
 }
 
 //------------------------------------------------------------------------------
 // Сортировка языков программирования по их частному
-void Binaryinsertion(number* mas, int size) {
-    //Указатели в начало и в конец массива
-    int i = 0;
-    int j = size - 1;
-
-    //Центральный элемент массива
-    double mid = num_calculation(mas[size / 2]);
-
-    do {
-        //В левой части массива оставляем на месте элементы, которые больше центрального
-        while (num_calculation(mas[i]) > mid) {
-
-            i++;
-        }
-        // В правой части пропускаем элементы, которые меньше центрального
-        while (num_calculation(mas[j]) < mid) {
-            j--;
-        }
-
-        // Меняем элементы местами
-        if (i <= j) {
-            number &tmp = mas[i];
-            mas[i] = mas[j];
-            mas[j] = tmp;
-
-            i++;
-            j--;
-        }
-    } while (i <= j);
-
-    if (j > 0) {
-        Binaryinsertion(mas, j + 1);
+int container::binarySearch(int *mas, int size, int value, int start, int end) {
+    if (start == end) {
+        if (mas[start] < value) {
+            return start;
+        } else return start + 1;
     }
-    if (i < size) {
-        Binaryinsertion(&mas[i], size - i);
-    }
+    if (start > end)
+        return start;
 
+    long long mid = (start + end) / 2;
+    if (mas[mid] > value) {
+        return binarySearch(mas,size, value, mid + 1, end);
+    } else if (mas[mid] < value) {
+        return binarySearch(mas,size, value, start, mid - 1);
+    } else
+        return mid;
+}
+
+void container::Binaryinsertion(int *mas, int size) {
+    for (int i = 1; i < size; ++i) {
+        //cout << mas[i];
+        //cout <<"\n";
+        int j = i - 1;
+        int value = mas[i];
+        int index = binarySearch(mas, size, value, 0, j);
+        while (j >= index) {
+            mas[j + 1] = mas[j];
+            --j;
+        }
+
+    }
 }
