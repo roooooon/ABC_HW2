@@ -1,19 +1,18 @@
 #include "number.h"
-
 // Случайный ввод обобщенной чисел
-bool num_InRnd(number &n) {
+bool number::num_InRnd(number &n) {
     auto k = rand() % 3 + 1;
-    switch(k) {
+    switch (k) {
         case 1:
             n.k = number::COMPLEX;
-            InRnd(n.c);
+            complex_number::InRnd(n.c);
             return true;
         case 2:
             n.k = number::POLAR;
-            polar_InRnd(n.p);
+            polar::polar_InRnd(n.p);
         case 3:
             n.k = number::FRACTION;
-            f_IRnd(n.f);
+            fraction::f_IRnd(n.f);
             return true;
         default:
             return false;
@@ -22,16 +21,16 @@ bool num_InRnd(number &n) {
 
 //------------------------------------------------------------------------------
 // Вычисление периметра чисел
-double num_calculation(number &n) {
-    switch(n.k) {
+double number::num_calculation(number &n) {
+    switch (n.k) {
         case number::COMPLEX:
-            return complex_calculation(n.c);
+            return complex_number::complex_calculation(n.c);
             break;
         case number::FRACTION:
-            return fraction_calculation(n.f);
+            return fraction::fraction_calculation(n.f);
             break;
         case number::POLAR:
-            return polar_calculation(n.p);
+            return polar::polar_calculation(n.p);
         default:
             return 0.0;
     }
@@ -39,21 +38,21 @@ double num_calculation(number &n) {
 
 //------------------------------------------------------------------------------
 // Ввод параметров обобщенной чисел из файла
-bool num_In(number& n, ifstream &ifst) {
+bool number::num_In(number &n, ifstream &ifst) {
     int k;
     ifst >> k;
-    switch(k) {
+    switch (k) {
         case 1:
             n.k = number::COMPLEX;
-            c_In(n.c, ifst);
+            complex_number::c_In(n.c, ifst);
             return true;
         case 2:
             n.k = number::FRACTION;
-            fraction_In(n.f, ifst);
+            fraction::fraction_In(n.f, ifst);
             return true;
         case 3:
-            n.k =number::POLAR;
-            polar_In(n.p,ifst);
+            n.k = number::POLAR;
+            polar::polar_In(n.p, ifst);
             return true;
         default:
             return false;
@@ -62,16 +61,16 @@ bool num_In(number& n, ifstream &ifst) {
 
 //------------------------------------------------------------------------------
 // Вывод параметров текущей фигуры в поток
-void num_Out(number &n, ofstream &ofst) {
-    switch(n.k) {
+void number::num_Out(number &n, ofstream &ofst) {
+    switch (n.k) {
         case number::COMPLEX:
-            c_Out(n.c, ofst);
+            complex_number::c_Out(n.c, ofst);
             break;
         case number::FRACTION:
-            fraction_Out(n.f, ofst);
+            fraction::fraction_Out(n.f, ofst);
             break;
         case number::POLAR:
-            polar_Out(n.p,ofst);
+            polar::polar_Out(n.p, ofst);
         default:
             ofst << "Incorrect number!" << endl;
     }
