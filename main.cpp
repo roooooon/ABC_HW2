@@ -2,14 +2,11 @@
 // main.cpp - содержит главную функцию,
 // обеспечивающую простое тестирование
 //------------------------------------------------------------------------------
-#include <windows.h>
 #include <iostream>
 #include <cstdlib> // для функций rand() и srand()
 #include <ctime>   // для функции time()
 #include <cstring>
-#include<fstream>
 #include "container.h"
-
 void errMessage1() {
     cout << "incorrect command line!\n"
             "  Waited:\n"
@@ -35,13 +32,13 @@ int main(int argc, char* argv[]) {
     }
 
     cout << "Start"<< endl;
-    container con;
-    Init(con);
+    container con{};
+    container::Init(con);
 
     ////cout << "argv[1] = " << argv[1] << "\n";
     if(!strcmp(argv[1], "-f")) {
         ifstream ifst(argv[2]);
-        con_In(con, ifst);
+        container::con_In(con, ifst);
     }
     else if(!strcmp(argv[1], "-n")) {
         auto size = atoi(argv[2]);
@@ -54,7 +51,7 @@ int main(int argc, char* argv[]) {
         // системные часы в качестве инициализатора
         srand(static_cast<unsigned int>(time(0)));
         // Заполнение контейнера генератором случайных чисел
-        con_InRnd(con, size);
+        container::con_InRnd(con, size);
     }
     else {
         errMessage2();
@@ -64,14 +61,14 @@ int main(int argc, char* argv[]) {
     // Вывод содержимого контейнера в файл
     ofstream ofst1(argv[3]);
     ofst1 << "Filled container:\n";
-    con_Out(con, ofst1);
+    container::con_Out(con, ofst1);
 
     // The 2nd part of task
     ofstream ofst2(argv[4]);
     ofst2 << "Binary insertion by quotient:" << "\n";
-    Binaryinsertion(con.cont, con.len);
-    con_Out(con, ofst2);
-    con_Clear(con);
+    container::Binaryinsertion(reinterpret_cast<int *>(con.cont), con.len);
+    container::con_Out(con, ofst2);
+    container::con_Clear(con);
     cout << "Stop" << endl;
     unsigned int end_time = clock(); // конечное время
     unsigned int search_time = end_time - start_time; // искомое время
