@@ -13,22 +13,21 @@ using namespace std;
 class complex_number {
 public:
     double real , imaginary ;
-};
-
-//------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
 // Ввод параметров комплексного числа из потока
-void c_In(complex_number &c, ifstream &ifst);
+    static void c_In(complex_number &c, ifstream &ifst);
 
 //------------------------------------------------------------------------------
 // Случайный ввод параметров комплексного числа
-void InRnd(complex_number &c);
+    static void InRnd(complex_number &c);
 
 //------------------------------------------------------------------------------
 // Вычисление значения комплексного числа
-double complex_calculation(complex_number &c);
+    static double complex_calculation(complex_number &c);
 
 //------------------------------------------------------------------------------
 // Вывод параметров комплексного числа в файл
-void c_Out(complex_number &c, ofstream &ofst);
+    static void c_Out(complex_number &c, ofstream &ofst);
 
+};
 #endif //UNTITLED6_COMPLEX_NUMBER_H
