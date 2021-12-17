@@ -14,21 +14,20 @@ using namespace std;
 class polar {
 public:
     double angle, radius;
-};
-
-//------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
 // Вычисление значения комплексного числа.
-double polar_calculation (polar &p);
+    static double polar_calculation (polar &p);
 
 // Случайный ввод параметров комплексного числа
-void polar_InRnd(polar &p);
+    static void polar_InRnd(polar &p);
 
 //------------------------------------------------------------------------------
 // Вывод параметров полярного числа в форматируемый поток
-void polar_Out(polar &p, ofstream &ofst);
+    static void polar_Out(polar &p, ofstream &ofst);
 
 //------------------------------------------------------------------------------
 // Ввод параметров поляпного числа из файла
-void polar_In(polar &p, ifstream &ifst);
+    static void polar_In(polar &p, ifstream &ifst);
+};
 
 #endif //UNTITLED6_POLAR_H
